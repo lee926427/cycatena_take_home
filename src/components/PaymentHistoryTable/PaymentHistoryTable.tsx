@@ -16,7 +16,7 @@ import { makePaymentHistoryData } from "../../constants";
 const columnHelper = createColumnHelper<PaymentHistoryProps>();
 
 export function PaymentHistoryTable() {
-  const [data, setData] = useState<null | PaymentHistoryProps[]>(null);
+  const [data, setData] = useState<PaymentHistoryProps[]>([]);
   const [sorting, setSorting] = useState<SortingState>([
     {
       id: "dateCreated",
@@ -80,7 +80,7 @@ export function PaymentHistoryTable() {
     }, 3000);
   }, []);
 
-  if (data === null) {
+  if (data.length === 0) {
     return <div className="">loading</div>;
   }
 

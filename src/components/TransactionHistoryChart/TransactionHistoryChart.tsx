@@ -10,7 +10,7 @@ type TransactionHistoryChartProps = {
 export function TransactionHistoryChart({
   days = 14,
 }: TransactionHistoryChartProps) {
-  const [data, setData] = useState<number[][]>([]);
+  const [data, setData] = useState<[Date, number][]>([]);
 
   const getTransactionHistory = useCallback(async () => {
     const transactionHistory = await fetchTransactionHistory(days);
@@ -28,14 +28,43 @@ export function TransactionHistoryChart({
       align: "left",
     },
     chart: {
-      height: 160,
+      height: 180,
+    },
+    xAxis: {
+      type: "datetime",
+      tickWidth: 0,
+      dateTimeLabelFormats: {
+        month: "%b. %e",
+        year: "%b",
+      },
+    },
+    yAxis: {
+      endOnTick: false,
+      startOnTick: false,
+      gridLineWidth: 0,
+      title: {
+        text: null,
+      },
     },
     series: [
       {
+        name: "Transactions",
         type: "spline",
         data: data,
       },
     ],
+    plotOptions: {
+      spline: {
+        color: "#000000",
+        lineWidth: 1,
+        marker: {
+          enabled: false,
+        },
+      },
+    },
+    tooltip: {
+      pointFormat: "Transactions: {point.y} <br>",
+    },
     legend: { enabled: false },
   };
 
