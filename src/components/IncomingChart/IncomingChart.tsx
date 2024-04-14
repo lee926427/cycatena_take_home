@@ -44,6 +44,7 @@ export function IncomingChart() {
     chart: {
       type: "column",
       backgroundColor: "#00000000",
+      width: 780,
     },
     xAxis: {
       type: "datetime",
@@ -123,7 +124,7 @@ export function IncomingChart() {
   }
 
   return (
-    <main className="h-full flex items-center">
+    <main className="h-full w-full flex items-center">
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </main>
   );
