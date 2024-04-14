@@ -10,7 +10,7 @@ type TransactionHistoryChartProps = {
 export function TransactionHistoryChart({
   days = 14,
 }: TransactionHistoryChartProps) {
-  const [data, setData] = useState<[Date, number][]>([]);
+  const [data, setData] = useState<number[][]>([]);
 
   const getTransactionHistory = useCallback(async () => {
     const transactionHistory = await fetchTransactionHistory(days);
@@ -28,10 +28,11 @@ export function TransactionHistoryChart({
       align: "left",
     },
     chart: {
-      height: 180,
+      height: 160,
     },
     xAxis: {
       type: "datetime",
+      lineWidth: 0,
       tickWidth: 0,
       dateTimeLabelFormats: {
         month: "%b. %e",

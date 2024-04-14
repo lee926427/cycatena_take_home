@@ -1,5 +1,3 @@
-import { add } from "date-fns";
-
 export async function fetchTransactionHistory(
   days: number,
 ): Promise<number[][]> {
