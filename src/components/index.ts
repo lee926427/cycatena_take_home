@@ -1,3 +1,4 @@
+export * from "./AssetsChart";
 export * from "./IncomingChart";
 export * from "./LatestWeekChart";
 export * from "./PaymentHistoryTable";

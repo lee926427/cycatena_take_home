@@ -4,6 +4,7 @@ import {
   LatestWeekChart,
   PaymentHistoryTable,
   IncomingChart,
+  AssetsChart,
 } from "./components";
 
 import "./assets/styles/index.css";
@@ -26,7 +27,7 @@ function App() {
           </div>
           <div className="col-span-2 row-span-2 bg-stone-400 dark:bg-slate-800 h-40">
             <ErrorBoundary fallback={<div></div>}>
-              <TransactionHistoryChart days={14} />
+              <AssetsChart />
             </ErrorBoundary>
           </div>
           <div className="col-span-full row-span-10 bg-stone-400 dark:bg-slate-800 p-4 flex flex-col">
@@ -37,7 +38,7 @@ function App() {
         </section>
         <section className="col-span-3 row-span-12 bg-stone-400 dark:bg-slate-800">
           <ErrorBoundary fallback={<div></div>}>
-              <IncomingChart />
+            <IncomingChart />
           </ErrorBoundary>
         </section>
       </main>
