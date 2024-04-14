@@ -1,50 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
+type ItemProps = {
+  name: string;
+  data: number[];
+  type: string;
+  color: string;
+  pointStart: number;
+  pointInterval: number;
+  yAxis?: number;
+  negativeColor?: string;
+};
+
 export function IncomingChart() {
-  const [data] = useState([
-    {
-      name: "Incoming",
-      type: "column",
-      data: [6.4, 5.2, 3.0, 0.2, 2.3, 5.5, 8.4, 8.3, 5.1, 0.9, 1.1, 4.0],
-      pointStart: Date.UTC(2023, 2, 1),
-      pointInterval: 1000 * 60 * 60 * 24,
-      color: "#685BAD",
-    },
-    {
-      name: "Outgoing",
-      type: "column",
-      data: [
-        -6.4, -5.2, -3.0, -0.2, -2.3, -5.5, -8.4, -8.3, -5.1, -0.9, -1.1, -4.0,
-      ],
-      pointStart: Date.UTC(2023, 2, 1),
-      pointInterval: 1000 * 60 * 60 * 24,
-      color: "#49CFAB",
-      negativeColor: "#49CFAB",
-    },
-    {
-      name: "Balance",
-      type: "spline",
-      color: "#dca613",
-      data: [
-        203.6, 198.8, 208.5, 213.6, 212.1, 221.1, 208.5, 213.6, 216.5, 210.4,
-        218.8, 220.6,
-      ],
-      pointStart: Date.UTC(2023, 2, 1),
-      pointInterval: 1000 * 60 * 60 * 24,
-      yAxis: 1,
-    },
-  ]);
+  const [data, setData] = useState<ItemProps[]>([]);
+
   const chartOptions = {
     title: {
-      text: ``,
+      text: null,
       align: "left",
     },
     chart: {
       type: "column",
       backgroundColor: "#00000000",
       width: 780,
+      height: 1000,
     },
     xAxis: {
       type: "datetime",
@@ -118,6 +99,45 @@ export function IncomingChart() {
     },
     series: data,
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setData([
+        {
+          name: "Incoming",
+          data: [6.4, 5.2, 3.0, 0.2, 2.3, 5.5, 8.4, 8.3, 5.1, 0.9, 1.1, 4.0],
+          type: "column",
+          pointStart: Date.UTC(2023, 2, 1),
+          pointInterval: 1000 * 60 * 60 * 24,
+          color: "#685BAD",
+        },
+        {
+          name: "Outgoing",
+          data: [
+            -6.4, -5.2, -3.0, -0.2, -2.3, -5.5, -8.4, -8.3, -5.1, -0.9, -1.1,
+            -4.0,
+          ],
+          type: "column",
+          pointStart: Date.UTC(2023, 2, 1),
+          pointInterval: 1000 * 60 * 60 * 24,
+          color: "#49CFAB",
+          negativeColor: "#49CFAB",
+        },
+        {
+          name: "Balance",
+          data: [
+            203.6, 198.8, 208.5, 213.6, 212.1, 221.1, 208.5, 213.6, 216.5,
+            210.4, 218.8, 220.6,
+          ],
+          type: "spline",
+          color: "#dca613",
+          pointStart: Date.UTC(2023, 2, 1),
+          pointInterval: 1000 * 60 * 60 * 24,
+          yAxis: 1,
+        },
+      ]);
+    }, 2800);
+  }, []);
 
   if (data.length === 0) {
     return <div className="w-full h-40">loading</div>;

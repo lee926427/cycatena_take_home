@@ -24,8 +24,13 @@ export function TransactionHistoryChart({
 
   const chartOptions = {
     title: {
-      text: `TRANSACTION HISTORY IN ${days} DAYS`,
+      text: `Transaction history in ${days} days`,
       align: "left",
+      style: {
+        color: "#aaa",
+        fontWeight: "normal",
+        fontSize: 14,
+      },
     },
     chart: {
       height: 160,

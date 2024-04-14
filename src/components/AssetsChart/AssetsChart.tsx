@@ -11,41 +11,22 @@ type AssetProps = {
 export function AssetsChart() {
   const [data, setData] = useState<AssetProps[]>([]);
 
-  useEffect(() => {
-    setData([
-      {
-        name: "USDC",
-        y: 505992,
-        z: 20,
-      },
-      {
-        name: "BTC",
-        y: 551695,
-        z: 20,
-      },
-      {
-        name: "ETC",
-        y: 312679,
-        z: 20,
-      },
-      {
-        name: "other",
-        y: 78865,
-        z: 20,
-      },
-    ]);
-  }, []);
+ 
 
   const chartOptions = {
     title: {
       text: "Assets",
       align: "left",
+      style: {
+        color: "#aaa",
+        fontWeight: "normal",
+        fontSize: 14,
+      },
     },
     chart: {
       type: "pie",
       height: 160,
     },
-
     series: [
       {
         minPointSize: 20,
@@ -83,13 +64,40 @@ export function AssetsChart() {
     },
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setData([
+        {
+          name: "USDC",
+          y: 505992,
+          z: 20,
+        },
+        {
+          name: "BTC",
+          y: 551695,
+          z: 20,
+        },
+        {
+          name: "ETC",
+          y: 312679,
+          z: 20,
+        },
+        {
+          name: "other",
+          y: 78865,
+          z: 20,
+        },
+      ]);
+    }, 2300);
+  }, []);
+
   if (data.length === 0) {
     return <div className="w-full h-40">loading</div>;
   }
 
   return (
     <div className="relative">
-      <i className="not-italic absolute top-16 font-bold left-4 z-20">
+      <i className="not-italic absolute top-16 left-4 z-20 text-2xl">
         $ {(52658).toLocaleString()}
       </i>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />

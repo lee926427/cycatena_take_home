@@ -1,28 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 export function LatestWeekChart() {
-  const [data] = useState([
-    {
-      name: "Point 1",
-      color: "#00FF00",
-      y: 0,
-    },
-    {
-      name: "Point 2",
-      color: "#FF00FF",
-      y: 5,
-    },
-  ]);
+  const [data, setData] = useState<number[]>([]);
+
   const chartOptions = {
     title: {
-      text: ``,
+      text: "Last 7 days",
       align: "left",
+      style: {
+        color: "#aaa",
+        fontWeight: "normal",
+        fontSize: 14,
+      },
+      x: -290,
     },
     chart: {
       type: "column",
-      height: 140,
+      height: 160,
+      spacingLeft: 300,
     },
     xAxis: {
       lineWidth: 0,
@@ -52,15 +49,15 @@ export function LatestWeekChart() {
     },
     series: [
       {
-        name: "left",
+        name: null,
         data: [500, 500, 500, 500, 500, 500, 500],
         color: "#f1f1f1",
         enableMouseTracking: false,
         pointPadding: 0.3,
       },
       {
-        name: "Road",
-        data: [434, 290, 307, 260, 344, 187, 264],
+        name: null,
+        data: data,
         color: "#3F8FD5",
         enableMouseTracking: false,
         pointPadding: 0.3,
@@ -72,19 +69,26 @@ export function LatestWeekChart() {
     legend: { enabled: false },
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setData([434, 290, 307, 260, 344, 187, 264]);
+    }, 3600);
+  }, []);
+
   if (data.length === 0) {
     return <div className="w-full h-40">loading</div>;
   }
 
   return (
-    <div className="bg-white grid grid-cols-6 px-4 h-full ">
-      <header className="col-span-2 flex flex-col justify-center">
-        <h1 className="font-bold text-lg">Last 7 days</h1>
-        <i className="not-italic">$ {(45688).toLocaleString()}</i>
-      </header>
-      <main className="col-span-4 flex justify-center items-center">
-        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      </main>
+    <div className="bg-white relative">
+      {/* <header className="col-span-2 flex flex-col justify-center"> */}
+      <i className="not-italic absolute top-16 left-4 z-10 text-2xl">
+        $ {(45688).toLocaleString()}
+      </i>
+      {/* </header> */}
+      {/* <main className="col-span-4 flex justify-center items-center"> */}
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      {/* </main> */}
     </div>
   );
 }
