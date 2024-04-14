@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { LoadingView } from "../LoadingView";
 
 type AssetProps = {
   name: string;
@@ -10,8 +11,6 @@ type AssetProps = {
 
 export function AssetsChart() {
   const [data, setData] = useState<AssetProps[]>([]);
-
- 
 
   const chartOptions = {
     title: {
@@ -92,7 +91,11 @@ export function AssetsChart() {
   }, []);
 
   if (data.length === 0) {
-    return <div className="w-full h-40">loading</div>;
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <LoadingView />
+      </div>
+    );
   }
 
   return (

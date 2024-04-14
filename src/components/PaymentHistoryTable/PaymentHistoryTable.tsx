@@ -12,6 +12,7 @@ import {
 } from "@tanstack/react-table";
 
 import { makePaymentHistoryData } from "../../constants";
+import { LoadingView } from "../LoadingView";
 
 const columnHelper = createColumnHelper<PaymentHistoryProps>();
 
@@ -81,7 +82,11 @@ export function PaymentHistoryTable() {
   }, []);
 
   if (data.length === 0) {
-    return <div className="">loading</div>;
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <LoadingView />
+      </div>
+    );
   }
 
   return (

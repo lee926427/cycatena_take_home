@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { fetchTransactionHistory } from "../../api/fetchTransactionHistory";
+import { LoadingView } from "../LoadingView";
 
 type TransactionHistoryChartProps = {
   days: number;
@@ -75,7 +76,11 @@ export function TransactionHistoryChart({
   };
 
   if (data.length === 0) {
-    return <div className="w-full h-40">loading</div>;
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <LoadingView />
+      </div>
+    );
   }
 
   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
