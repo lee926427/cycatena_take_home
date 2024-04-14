@@ -20,10 +20,10 @@ export const makePaymentHistoryData = (startTime: Date, endTime: Date) => {
 
   const randomTime = () =>
     add(startTime, {
-      months: Math.ceil(Math.random() * 3),
-      days: Math.ceil(Math.random() * 30),
-      hours: Math.ceil(Math.random() * 24),
-      minutes: Math.ceil(Math.random() * 60),
+      months: Math.round(Math.random() * 3),
+      days: Math.round(Math.random() * 30),
+      hours: Math.round(Math.random() * 24),
+      minutes: Math.round(Math.random() * 60),
     });
 
   return (count = 30) => {
@@ -36,9 +36,9 @@ export const makePaymentHistoryData = (startTime: Date, endTime: Date) => {
       mockData.push({
         dateCreated: format(new Date(dateCreated), "MM/dd/yy hh:mm aa"),
         description:
-          descriptions[Math.floor(Math.random() * descriptions.length)],
-        amount: Math.floor(Math.random() * 6000),
-        status: Math.ceil(Math.random() * 2) === 1,
+          descriptions[Math.round(Math.random() * descriptions.length)],
+        amount: Math.round(Math.random() * 6000),
+        status: Math.round(Math.random()) === 1,
       });
     }
 
