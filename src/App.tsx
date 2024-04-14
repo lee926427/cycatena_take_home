@@ -1,9 +1,9 @@
-import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import {
   TransactionHistoryChart,
   LatestWeekChart,
   PaymentHistoryTable,
+  IncomingChart,
 } from "./components";
 
 import "./assets/styles/index.css";
@@ -37,7 +37,7 @@ function App() {
         </section>
         <section className="col-span-3 row-span-12 bg-stone-400 dark:bg-slate-800">
           <ErrorBoundary fallback={<div></div>}>
-            <Suspense fallback={<div>loading</div>}></Suspense>
+              <IncomingChart />
           </ErrorBoundary>
         </section>
       </main>
